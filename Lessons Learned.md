@@ -3,7 +3,7 @@
 # ENUMERATION
 
 ## Basic NMAP Scan (Run on KALI)
-nmap -sC -sV
+nmap -sC -sV [REMOTE IP]
 
 ## Add Host to Hosts File (Run on KALI)
 echo "[IP] [hostname]" | sudo tee -a /etc/hosts
@@ -49,6 +49,9 @@ os.system("/bin/bash")
 ## Reverse Shell (Run on KALI)
 nc -lvnp 1234
 
+## Stabilize Shell (Run on KALI)
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+
 ## HTTP Server (Run on KALI)
 sudo python3 -m http.server 80
 
@@ -69,3 +72,10 @@ cat [fileneame]
 
 ## Search Files for String (Linux)
 cat * | grep -i [string]*
+
+
+# Escalation Workflow
+sudo -l [Are there any exploitable SUDOs?]
+id [what am I a member of?]
+
+
